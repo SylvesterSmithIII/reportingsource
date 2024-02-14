@@ -3,6 +3,7 @@ import NavBar from "@/components/NavBar";
 import { Roboto } from "next/font/google";
 import SessionProvider from '@/components/SessionProvider'
 import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 const roboto = Roboto({ subsets: ["latin"], weight: '400' });
 
@@ -15,7 +16,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
 
-  const session = await getServerSession()
+  const session = await getServerSession(authOptions)
 
   return (
       <html lang="en">

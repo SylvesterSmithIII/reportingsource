@@ -38,21 +38,25 @@ export default function PropertiesPage() {
     };
 
     return (
-        <div className="my-4">
-            <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search by address or parcel number..."
-                className="px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-            />
-            <button
-                onClick={handleSearch}
-                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-600 disabled:opacity-50"
-            >
-                Search
-            </button>
-            <div className="mt-4">
+        <div className="my-12">
+            <CreateProperty setReload={setReload} />
+            <div className="px-4 max-w-[800px] mx-auto flex mb-8">
+                <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search by address or parcel number..."
+                    className="px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-gray-600"
+                />
+                <button
+                    onClick={handleSearch}
+                    className="ml-4 px-4 py-2 bg-gray-500 text-white rounded-md focus:outline-none hover:bg-gray-600 "
+                >
+                    Search
+                </button>
+            </div>
+            
+            <div className="flex flex-wrap p-4 gap-4 justify-center mt-4">
                 {filteredProperties.map((property, idx) => (
                     <PropertyCard
                         key={property._id}
@@ -66,9 +70,6 @@ export default function PropertiesPage() {
                         setReload={setReload}
                     />
                 ))}
-            </div>
-            <div className="mt-4">
-                <CreateProperty setReload={setReload} />
             </div>
         </div>
     );

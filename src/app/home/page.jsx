@@ -9,7 +9,6 @@ import { signOut } from "next-auth/react";
 export default function Home() {
     const { data: session } = useSession();
     const accepted = session?.user?.accepted;
-    console.log(accepted)
 
     useEffect(() => {
         if (!session) redirect('/');

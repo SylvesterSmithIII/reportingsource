@@ -12,8 +12,6 @@ export async function GET() {
         select: 'name email company _id'
     })
 
-    console.log(properties)
-
     return NextResponse.json(properties)
 
 }

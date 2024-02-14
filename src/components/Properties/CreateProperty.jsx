@@ -36,19 +36,22 @@ export default function CreateProperty({ setReload }) {
     
 
     return (
-        <div>
+        <div className="max-w-[800px] mx-auto">
             {!showForm ? (
-                <button onClick={() => setShowForm(true)} className="px-4 py-2 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-600">
+                <div className="flex justify-center items-center mb-12">
+                    <button onClick={() => setShowForm(true)} className="px-4 py-2 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-600">
                     Add New
-                </button>
+                    </button>
+                </div>
+                
             ) : (
-                <form onSubmit={handleSubmit} className="mt-4">
+                <form onSubmit={handleSubmit} className="mt-4 flex">
                     <input
                         type="text"
                         name="address"
                         placeholder="Address"
                         onChange={handleChange}
-                        className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                        className="w-2/5 block px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                         required
                     />
                     <input
@@ -56,7 +59,7 @@ export default function CreateProperty({ setReload }) {
                         name="parcelNumber"
                         placeholder="Parcel Number"
                         onChange={handleChange}
-                        className="block w-full mt-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                        className="block w-2/5 mt-2 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
                         required
                     />
                     <input

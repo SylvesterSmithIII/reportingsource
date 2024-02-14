@@ -1,9 +1,27 @@
 import User from "@/models/user"
-import UserCard from "./userCard"
+import UserCard from "./UserCard"
+import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
+import { authOptions } from "../api/auth/[...nextauth]/route"
 
 export default async function Admin() {
 
+    const session = await getServerSession(authOptions)
+
+    if (session.user.mod !== 'true') return redirect('/')
+
     const waitlistedUsers = await User.find({ accepted: 'waitlisted' })
+
+    if (waitlistedUsers.length === 0) {
+        return (
+            <div className="h-screen flex flex-col justify-center items-center">
+                <h1 className="text-6xl">No One</h1>
+                <h1 className="text-6xl">To Verify</h1>
+            </div>
+        )
+    }
+
+    console.log(waitlistedUsers)
 
     const waitlistedUserElements = waitlistedUsers.map((user, idx) => { 
 

@@ -2,67 +2,64 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-
-const authOptions = {
+export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
-      // The name to display on the sign-in form (e.g. 'Credentials')
       name: 'Credentials',
-      // The credentials are used to generate a suitable form on the sign-in page.
-      // You can override this with a simple HTML form.
-      credentials: {},
-      // You need to provide a authorize function that returns a user object.
-      // If you return null or false then the credentials will be rejected.
-      authorize: (credentials) => {
-      
-       console.log(credentials)
+      credentials: {
+        // You might want to specify the credentials fields depending on your needs
+      },
+      authorize: async (credentials, req) => {
+        // Your custom authentication logic goes here
+        // Example: Check credentials against a users database
+        // If authentication fails, return null
+        // Let's assume the login is successful if credentials are provided
+        const { _id, mod, accepted } = credentials;
 
-       const { _id, mod, accepted } = credentials
-
-      
-       const user = {
-          _id,
-          mod,
-          accepted
-       }
-
-       console.log(user)
-
-        return user
-       
-      }
-    })
+        // You will need to replace this with actual authentication logic
+        if (_id && mod !== undefined && accepted !== undefined) {
+          return { _id, mod, accepted };
+        } else {
+          return null; // Return null if authentication fails
+        }
+      },
+    }),
   ],
-  
-  // Optionally add more configuration here
   callbacks: {
     async jwt({ token, user }) {
-      // If user object is available (sign in), add user data to the token
+      // If user is defined, add user information to the token
       if (user) {
         token._id = user._id;
         token.mod = user.mod;
-        token.accepted = user.accepted
+        token.accepted = user.accepted;
       }
       return token;
     },
     async session({ session, token }) {
-      // Add user data to the session object from the token
-      session.user._id = token._id;
-      session.user.mod = token.mod;
-      session.user.accepted = token.accepted;
-
+      // Create a new user object with the properties you want to include in the session
+      session.user = {
+        _id: token._id,
+        mod: token.mod,
+        accepted: token.accepted
+      };
       return session;
     },
-
-    
   },
-
   session: {
     strategy: 'jwt',
   },
 };
 
-const handler = NextAuth(authOptions)
+export const nextAuthHandler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST}
+export const config = {
+  api: {
+    bodyParser: false,
+    externalResolver: true,
+  },
+};
+
+// Export the NextAuth handler for all HTTP methods that your application needs.
+export const GET = nextAuthHandler;
+export const POST = nextAuthHandler;
