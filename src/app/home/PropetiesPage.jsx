@@ -36,6 +36,7 @@ export default function PropertiesPage() {
         );
         setFilteredProperties(filtered);
     };
+    
 
     return (
         <div className="my-12">
