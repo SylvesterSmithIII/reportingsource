@@ -53,7 +53,7 @@ export const authOptions = {
 
 export const nextAuthHandler = NextAuth(authOptions);
 
-export const config = {
+const config = {
   api: {
     bodyParser: false,
     externalResolver: true,
