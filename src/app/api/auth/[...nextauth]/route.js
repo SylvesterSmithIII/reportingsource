@@ -53,13 +53,6 @@ export const authOptions = {
 
 export const nextAuthHandler = NextAuth(authOptions);
 
-const config = {
-  api: {
-    bodyParser: false,
-    externalResolver: true,
-  },
-};
-
 // Export the NextAuth handler for all HTTP methods that your application needs.
 export const GET = nextAuthHandler;
 export const POST = nextAuthHandler;
