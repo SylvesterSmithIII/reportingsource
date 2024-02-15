@@ -10,7 +10,7 @@ export default function UserCard({ id, name, email, company }) {
     const handleClick = async (e) => {
         const { name } = e.target
 
-        const response = await axios.put('/api/signup', {
+        await axios.put('/api/signup', {
             id,
             decision: name
         })
