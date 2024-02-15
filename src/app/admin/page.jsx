@@ -3,12 +3,15 @@ import UserCard from "@/components/UserCard"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 import { authOptions } from "../api/auth/[...nextauth]/route"
+import connectMongoDB from "@/libs/mongodb"
 
 export default async function Admin() {
 
     const session = await getServerSession(authOptions)
 
     if (session.user?.mod !== 'true') return redirect('/')
+
+    await connectMongoDB()
 
     const waitlistedUsers = await User.find({ accepted: 'waitlisted' })
 
@@ -20,8 +23,6 @@ export default async function Admin() {
             </div>
         )
     }
-
-    console.log(waitlistedUsers)
 
     const waitlistedUserElements = waitlistedUsers.map((user, idx) => { 
 
