@@ -34,7 +34,10 @@ export async function POST(request) {
     }
     };
 
+
+
     ses.sendEmail(params, (err, data) => {
+        console.log(data)
     if (err) {
         return NextResponse.json({ message: "There was a problem while seding the 2FA code" })
     } else {
@@ -42,6 +45,8 @@ export async function POST(request) {
     }
 
     });
+
+
 
     return NextResponse.json({ message: "Email Sent" })
 
