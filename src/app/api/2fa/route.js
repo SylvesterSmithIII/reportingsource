@@ -36,18 +36,13 @@ export async function POST(request) {
 
 
 
-    ses.sendEmail(params, (err, data) => {
-        console.log(data)
-    if (err) {
-        return NextResponse.json({ message: "There was a problem while seding the 2FA code" })
-    } else {
-        return NextResponse.json({ message: "Email was sent successfully" })
+    try {
+        const data = await ses.sendEmail(params).promise();
+        console.log(data);
+        return NextResponse.json({ message: "Email Sent" })
+    } catch (error) {
+        console.error('Error sending email:', error);
+        return NextResponse.json({ message: "Email Failed To Send" })
     }
-
-    });
-
-
-
-    return NextResponse.json({ message: "Email Sent" })
 
 }
