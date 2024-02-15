@@ -8,7 +8,7 @@ export default async function Admin() {
 
     const session = await getServerSession(authOptions)
 
-    if (session.user.mod !== 'true') return redirect('/')
+    if (session.user?.mod !== 'true') return redirect('/')
 
     const waitlistedUsers = await User.find({ accepted: 'waitlisted' })
 
