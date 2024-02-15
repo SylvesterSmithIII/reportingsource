@@ -18,7 +18,7 @@ export default function Home() {
         <>
             {
                 accepted === "waitlisted" ?
-                    <div className="w-full h-full flex flex-col justify-center items-center bg-gray-200">
+                    <div className="w-full h-screen flex flex-col justify-center items-center">
                         <h1 className="text-center text-3xl mb-4">Please wait to be accepted...</h1>
                         <button onClick={signOut} className="px-4 py-2 bg-red-500 text-white rounded-md">Sign Out</button>
                     </div>

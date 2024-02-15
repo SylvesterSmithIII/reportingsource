@@ -15,8 +15,6 @@ export default function NavBar() {
 
             { session && <><Link href='/home'>Properties Page</Link></> }
 
-            
-
             { session && <button className="text-gray-600 hover:text-red-700 transition-all duration-300 ease-in-out" onClick={signOut}>Sign Out</button> }
 
         </nav>
