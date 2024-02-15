@@ -32,7 +32,7 @@ export default async function Admin() {
     })
 
     return (
-        <div className="flex flex-wrap m-12 justify-center">
+        <div className="flex flex-wrap my-12 mx-4 justify-center">
             {waitlistedUserElements}
         </div>
     ) 

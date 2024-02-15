@@ -28,15 +28,15 @@ export default function PropertiesPage() {
         fetchData();
     }, [reload]);
 
-    const handleSearch = () => {
-        if (searchTerm.trim() === "") return setFilteredProperties(properties)
+    const handleChange = (e) => {
+        if (e.target.value.trim() === "") return setFilteredProperties(properties)
         const filtered = properties.filter(property =>
-            property.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            property.parcelNumber.toLowerCase().includes(searchTerm.toLowerCase())
+            property.address.toLowerCase().includes(e.target.value.toLowerCase()) ||
+            property.parcelNumber.toLowerCase().includes(e.target.value.toLowerCase())
         );
         setFilteredProperties(filtered);
     };
-    
+
 
     return (
         <div className="my-12">
@@ -44,17 +44,10 @@ export default function PropertiesPage() {
             <div className="px-4 max-w-[800px] mx-auto flex mb-8">
                 <input
                     type="text"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={handleChange}
                     placeholder="Search by address or parcel number..."
                     className="px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-gray-600"
                 />
-                <button
-                    onClick={handleSearch}
-                    className="ml-4 px-4 py-2 bg-gray-500 text-white rounded-md focus:outline-none hover:bg-gray-600 "
-                >
-                    Search
-                </button>
             </div>
             
             <div className="flex flex-wrap p-4 gap-4 justify-center mt-4">
