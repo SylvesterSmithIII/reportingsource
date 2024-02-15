@@ -6,8 +6,8 @@ const quattrocento = Quattrocento({ subsets: ["latin"], weight: '400' })
 
 export default function Home() {
   return (
-    <main className=" mt-16">
-      <div className="h-[32rem]">
+    <main className="mt-16">
+      <div className="h-[32rem] mx-4">
           <h1 className="text-center text-5xl md:text-7xl pt-16">The Reporting</h1>
           <h1 className="text-center text-5xl md:text-7xl mb-10">Source</h1>
 
