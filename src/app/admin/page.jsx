@@ -1,5 +1,5 @@
 import User from "@/models/user"
-import UserCard from "./UserCard"
+import UserCard from "@/components/UserCard"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 import { authOptions } from "../api/auth/[...nextauth]/route"
