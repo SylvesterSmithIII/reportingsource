@@ -13,8 +13,6 @@ export async function POST(request) {
         region: process.env.AWS_REGION
     })
 
-    console.log(process.env.AWS_REGION)
-
     const ses = new AWS.SES();
 
     const params = {
@@ -38,9 +36,9 @@ export async function POST(request) {
 
     ses.sendEmail(params, (err, data) => {
     if (err) {
-        console.log(err, err.stack); // an error occurred
+        return NextResponse.json({ message: "There was a problem while seding the 2FA code" })
     } else {
-        console.log(data);           // successful response
+        return NextResponse.json({ message: "Email was sent successfully" })
     }
 
     });

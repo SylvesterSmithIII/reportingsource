@@ -19,6 +19,10 @@ export async function POST(request) {
 
     await connectMongoDB()
 
+    const existingUser = await User.findOne({ email: userData.email })
+
+    if (existingUser) return NextResponse.json({ message: "user already exists" })
+
     const user = await User.create(userData)
 
     const clientUser = {

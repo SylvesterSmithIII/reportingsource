@@ -19,6 +19,8 @@ export default function SignUp() {
 
     const [userAuthCode, setUserAuthCode] = useState(null)
 
+    const [message, setMessage] = useState("")
+
     const handleChange = (e) => {
 
         const { name, value } = e.target
@@ -44,10 +46,12 @@ export default function SignUp() {
 
             setAuthCode(code)
 
-            await axios.post('/api/2fa', {
+            const response = await axios.post('/api/2fa', {
                 email: formData.email,
                 authCode: code
             })
+
+            setMessage(response.data.message)
 
         } else {
 
@@ -81,6 +85,7 @@ export default function SignUp() {
                             </form>
                             :
                             <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+                                <p>{message}</p>
                                 <input type="number" name="userAuthCode" placeholder="Enter 2FA Code" onChange={handleChange} />
                                 <input type="submit" value="Submit" className="bg-blue-500 text-white rounded-md py-2 cursor-pointer hover:bg-blue-600 transition-colors" />
                             </form>
